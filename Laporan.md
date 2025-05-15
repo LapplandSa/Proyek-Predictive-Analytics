@@ -91,18 +91,68 @@ Dataset terdiri dari 7043 baris dan 21 kolom, dengan setiap baris mewakili satu 
 
 ### Exploratory Data Analysis
 
-![Grafik Churn](images/numerik.png)
-![Grafik Churn](images/numerik.png)
-![Grafik Churn](images/numerik.png)
-![Grafik Churn](images/numerik.png)
-![Grafik Churn](images/numerik.png)
-![Grafik Churn](images/numerik.png)
-![Grafik Churn](images/numerik.png)
-![kategorikal](images/viskategorikal4.png)
+**Informasi Dataset**
 
+![info dataset](images/info.png)
 
-**Rubrik/Kriteria Tambahan (Opsional)**:
-- Melakukan beberapa tahapan yang diperlukan untuk memahami data, contohnya teknik visualisasi data atau exploratory data analysis.
+**Kolom Null**
+
+![data null](images/null.png)
+
+Nilai null hanya terdapat pada kolom 'TotalCharges' sebanyak 11 baris. Dikarenakan konversi dari tipe object ke tipe float.
+
+**Informasi Kolom Numerikal**
+
+![describe numerical](images/numerik.png)
+
+1. tenure (lama pelanggan berlangganan, dalam bulan):
+
+Mean: 32.42 bulan → rata-rata pelanggan bertahan sekitar 2,7 tahun.
+
+Min–Max: dari 1 hingga 72 bulan → ada pelanggan yang baru 1 bulan, ada juga yang sudah 6 tahun (maksimal).
+
+Distribusi:
+
+- 25% pelanggan hanya bertahan ≤ 9 bulan → indikasi churn dini.
+
+- 50% (median) bertahan sampai 29 bulan.
+
+- 25% pelanggan tertinggi bertahan lebih dari 55 bulan → pelanggan loyal.
+
+2. MonthlyCharges (tagihan bulanan):
+
+Mean: $64.80, dengan rentang $18.25 – $118.75.
+
+25% pelanggan membayar ≤ $35.59 → mungkin hanya ambil paket dasar.
+
+75% pelanggan membayar hingga hampir $90 → berarti banyak juga yang ambil layanan tambahan.
+
+3. TotalCharges (total biaya selama berlangganan):
+
+Mean: $2,283.30 tapi sangat spread out (std = $2,266.77).
+
+Ada pelanggan yang hanya bayar total $18.8 (mungkin baru bergabung), dan yang lain lebih dari $8,684 (pelanggan lama & mahal).
+
+**Visualisasi Data Kategorikal**
+
+![kategorikal](images/kategorikal1.png)
+![kategorikal](images/kategorikal2.png)
+![kategorikal](images/kategorikal3.png)
+![kategorikal](images/kategorikal4.png)
+
+**Visualisasi Data Numerikal**
+
+![numerikal](images/numerikal.png)
+
+**Matriks Korelasi**
+
+![numerikal](images/matriks_korelasi.png)
+
+Kolom TotalCharges dengan kolom tenure memiliki hubungan yang kuat yang bernilai 0.83
+
+Kolom MonthlyCharges dengan TotalCharges memiliki sedikit hubungan yang bernilai 0.65
+
+Sedangkan kolom tenure dan MonthlyCharges menunjukkan hubungan paling lemah yang brenilai 0.25
 
 ## Data Preparation
 Sebelum membangun model prediksi churn, dilakukan beberapa tahapan persiapan data agar data siap digunakan oleh algoritma machine learning. Tahapan tersebut adalah sebagai berikut:
@@ -128,33 +178,33 @@ Dalam proyek ini, digunakan tiga algoritma machine learning untuk memprediksi ch
 
 **1. K-Nearest Neighbors (KNN)**
 
-- Deskripsi: Algoritma KNN bekerja dengan mengklasifikasikan data berdasarkan label mayoritas dari k tetangga terdekat pada ruang fitur.
+- Deskripsi: KNN merupakan algoritma berbasis instance-based learning yang melakukan klasifikasi berdasarkan mayoritas label dari k tetangga terdekat dalam ruang fitur.
 
 - Kelebihan: Mudah dipahami dan diimplementasikan, efektif untuk dataset dengan distribusi yang jelas.
 
 - Kekurangan: Sensitif terhadap fitur yang tidak diskalakan dan data outlier, serta cenderung lambat pada dataset besar karena harus menghitung jarak ke semua titik data.
 
-- Parameter utama: jumlah tetangga (default 5).
+- Parameter utama: Jumlah tetangga (n_neighbors=5 secara default).
 
 **2. Random Forest**
 
-- Deskripsi: Algoritma ensemble yang membangun banyak pohon keputusan secara acak dan menggabungkan hasilnya untuk meningkatkan akurasi dan mengurangi overfitting.
+- Deskripsi: Random Forest adalah algoritma ensemble berbasis decision tree. Model ini membentuk banyak pohon keputusan secara acak dan mengambil voting mayoritas untuk menentukan prediksi akhir.
 
 - Kelebihan: Tahan terhadap overfitting, dapat menangani fitur numerik dan kategorikal, serta memberikan fitur penting (feature importance).
 
 - Kekurangan: Model cenderung lebih kompleks dan membutuhkan waktu komputasi lebih lama dibandingkan KNN.
 
-- Parameter utama: jumlah pohon (n_estimators=100), random state untuk reproducibility.
+- Parameter utama: n_estimators=100, random_state=42.
 
 **3. Gradient Boosting**
 
-- Deskripsi: Algoritma boosting yang membangun model secara iteratif dengan fokus memperbaiki kesalahan dari model sebelumnya, menghasilkan model yang kuat dan akurat.
-
+- Deskripsi: Gradient Boosting membangun model prediktif secara bertahap. Setiap model baru fokus pada memperbaiki kesalahan dari model sebelumnya.
+- 
 - Kelebihan: Memiliki performa yang tinggi pada banyak jenis data, mampu menangani interaksi fitur yang kompleks.
 
 - Kekurangan: Rentan terhadap overfitting jika tidak dilakukan tuning parameter dengan tepat, membutuhkan waktu pelatihan yang lebih lama.
 
-- Parameter utama: jumlah estimator (n_estimators=100), learning rate (learning_rate=0.1), random state.
+- Parameter utama: n_estimators=100, learning_rate=0.1, random_state=42.
 
 **Proses Pelatihan dan Evaluasi**
 
@@ -166,45 +216,44 @@ Dalam proyek ini, digunakan tiga algoritma machine learning untuk memprediksi ch
 
 **Pemilihan Model Terbaik**
 
-Dari hasil evaluasi, model Gradient Boosting menunjukkan nilai metrik evaluasi terbaik pada data test, khususnya pada recall dan F1-score yang penting untuk kasus churn karena ingin meminimalkan false negative (pelanggan yang berisiko churn tidak terdeteksi). Oleh karena itu, Gradient Boosting dipilih sebagai model utama untuk solusi prediksi churn.
+Berdasarkan evaluasi cross-validation 5-fold, model Gradient Boosting menunjukkan performa tertinggi dibanding model lainnya, dengan rata-rata akurasi 80.07% dan F1-score 57.68%. Khususnya pada recall dan F1-score yang penting untuk kasus churn karena ingin meminimalkan false negative (pelanggan yang berisiko churn tidak terdeteksi) Oleh karena itu, model ini dipilih sebagai kandidat final.
 
 **Improvement Model**
-Untuk model Gradient Boosting, langkah improvement yang dapat dilakukan adalah:
 
-Hyperparameter tuning menggunakan teknik Grid Search atau Random Search untuk menemukan kombinasi terbaik dari parameter seperti n_estimators, learning_rate, dan max_depth.
+Untuk model Gradient Boosting, telah dilakukan hyperparameter tuning menggunakan teknik Grid Search untuk mencari kombinasi terbaik dari parameter seperti n_estimators, learning_rate, dan max_depth. Proses ini menggunakan 5-fold cross-validation dengan metrik evaluasi F1-score sebagai dasar pemilihan model terbaik. Meskipun tuning ini membantu mengeksplorasi performa model secara lebih luas, hasil akhir pada data uji sedikit lebih rendah dibandingkan model Gradient Boosting dengan parameter default. Hal ini dapat disebabkan oleh:
 
-Early stopping untuk menghindari overfitting dengan menghentikan pelatihan jika performa pada data validasi tidak meningkat.
+- Model default secara kebetulan sudah cukup optimal untuk distribusi data yang ada.
 
-Feature engineering untuk menambah fitur baru yang lebih informatif.
+- Kombinasi parameter hasil tuning lebih cocok untuk distribusi pada training set, namun sedikit kurang generalisasi pada test set.
 
-Namun, untuk baseline proyek ini, model Gradient Boosting dengan parameter default sudah cukup untuk memberikan hasil yang memuaskan.
-
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan kelebihan dan kekurangan dari setiap algoritma yang digunakan.
-- Jika menggunakan satu algoritma pada solution statement, lakukan proses improvement terhadap model dengan hyperparameter tuning. **Jelaskan proses improvement yang dilakukan**.
-- Jika menggunakan dua atau lebih algoritma pada solution statement, maka pilih model terbaik sebagai solusi. **Jelaskan mengapa memilih model tersebut sebagai model terbaik**.
+Dengan demikian, meskipun proses tuning tetap bernilai dalam konteks eksplorasi dan validasi, model Gradient Boosting default tetap dipilih sebagai model final karena memberikan hasil yang sedikit lebih unggul secara keseluruhan.
 
 ## Evaluation
-**Metrik Evaluasi yang Digunakan**
+### Metrik Evaluasi yang Digunakan
 Dalam proyek prediksi churn pelanggan ini, beberapa metrik evaluasi utama yang digunakan adalah:
 
-Accuracy
+**Accuracy**
 
 Mengukur proporsi prediksi yang benar dari keseluruhan data. Namun, akurasi dapat menyesatkan jika data tidak seimbang karena model dapat memberikan prediksi mayoritas yang tinggi.
 
-Precision
+**Precision**
 
 Mengukur seberapa tepat prediksi positif model, yaitu dari semua yang diprediksi churn, berapa yang benar-benar churn. Precision penting untuk menghindari terlalu banyak false alarm, yaitu pelanggan yang diprediksi churn padahal tidak.
 
-Recall (Sensitivity)
+**Recall (Sensitivity)**
 
 Mengukur kemampuan model untuk menangkap semua kasus positif sebenarnya, yaitu dari semua pelanggan yang benar-benar churn, berapa yang terdeteksi oleh model. Recall sangat penting dalam konteks churn prediction karena perusahaan ingin meminimalkan pelanggan yang hilang tanpa terdeteksi.
 
-F1 Score
+**F1 Score**
 
 Harmonik rata-rata dari precision dan recall, memberikan keseimbangan antara keduanya. F1 Score berguna sebagai metrik tunggal untuk mengukur performa pada dataset yang tidak seimbang.
 
-**Penjelasan Hasil Evaluasi**
+**Cross-Validation: Stratified K-Fold**
+
+Selain evaluasi pada data uji, kami juga menggunakan teknik Stratified K-Fold Cross Validation (CV) dengan 5 lipatan untuk mengevaluasi performa model secara lebih stabil dan menghindari overfitting. Stratified berarti distribusi kelas dijaga tetap seimbang di setiap lipatan (fold), penting karena data churn cenderung tidak seimbang. Cross-validation membagi data latih menjadi 5 bagian: 4 untuk training, 1 untuk validasi, dan dilakukan secara bergantian sebanyak 5 kali. Hasil akhir adalah rata-rata dari setiap metrik di seluruh fold. Metode ini memberikan estimasi performa model yang lebih andal dan mendekati performa sebenarnya di data dunia nyata.
+
+### Penjelasan Hasil Evaluasi
+
 Setelah menerapkan model Gradient Boosting pada dataset churn, diperoleh hasil evaluasi sebagai berikut:
 
 Accuracy yang cukup tinggi menunjukkan model mampu membedakan antara pelanggan churn dan non-churn dengan baik secara umum.
