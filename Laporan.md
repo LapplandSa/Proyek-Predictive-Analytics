@@ -40,7 +40,7 @@ Untuk mempertahankan keberlanjutan bisnis, perusahaan telekomunikasi harus mampu
 
   - K-Nearest Neighbors (KNN): sebagai baseline model yang sederhana namun cukup efektif dalam mengenali pola tetangga terdekat.
 
-- Melakukan hyperparameter tuning pada model terbaik guna meningkatkan performa dan menghindari overfitting, misalnya dengan GridSearchCV atau         RandomizedSearchCV.
+- Melakukan hyperparameter tuning pada model terbaik guna meningkatkan performa dan menghindari overfitting, misalnya dengan GridSearchCV.
 
 ## Data Understanding
 Dataset yang digunakan dalam proyek ini berasal dari Telco Customer Churn yang tersedia di Kaggle (https://www.kaggle.com/datasets/blastchar/telco-customer-churn/data). Dataset ini berisi informasi pelanggan dari sebuah perusahaan telekomunikasi fiktif, termasuk detail layanan yang digunakan, data demografis, dan status churn.
@@ -98,13 +98,13 @@ Dataset terdiri dari 7043 baris dan 21 kolom, dengan setiap baris mewakili satu 
 
 **Kolom Null**
 
-![data null](images/null.png)
+![data null](https://raw.githubusercontent.com/LapplandSa/Proyek-Predictive-Analytics/main/images/null.png)
 
 Nilai null hanya terdapat pada kolom 'TotalCharges' sebanyak 11 baris. Dikarenakan konversi dari tipe object ke tipe float.
 
 **Informasi Kolom Numerikal**
 
-![describe numerical](images/numerik.png)
+![describe numerical](https://raw.githubusercontent.com/LapplandSa/Proyek-Predictive-Analytics/main/images/numerik.png)
 
 1. tenure (lama pelanggan berlangganan, dalam bulan):
 
@@ -136,18 +136,18 @@ Ada pelanggan yang hanya bayar total $18.8 (mungkin baru bergabung), dan yang la
 
 **Visualisasi Data Kategorikal**
 
-![kategorikal](images/kategorikal1.png)
-![kategorikal](images/kategorikal2.png)
-![kategorikal](images/kategorikal3.png)
-![kategorikal](images/kategorikal4.png)
+![kategorikal](https://raw.githubusercontent.com/LapplandSa/Proyek-Predictive-Analytics/main/images/kategorikal1.png)
+![kategorikal](https://raw.githubusercontent.com/LapplandSa/Proyek-Predictive-Analytics/main/images/kategorikal2.png)
+![kategorikal](https://raw.githubusercontent.com/LapplandSa/Proyek-Predictive-Analytics/main/images/kategorikal3.png)
+![kategorikal](https://raw.githubusercontent.com/LapplandSa/Proyek-Predictive-Analytics/main/images/kategorikal4.png)
 
 **Visualisasi Data Numerikal**
 
-![numerikal](images/numerikal.png)
+![numerikal](https://raw.githubusercontent.com/LapplandSa/Proyek-Predictive-Analytics/main/images/numerikal.png)
 
 **Matriks Korelasi**
 
-![numerikal](images/matriks_korelasi.png)
+![numerikal](https://raw.githubusercontent.com/LapplandSa/Proyek-Predictive-Analytics/main/images/matriks_korelasi.png)
 
 Kolom TotalCharges dengan kolom tenure memiliki hubungan yang kuat yang bernilai 0.83
 
@@ -235,25 +235,25 @@ Dalam proyek prediksi churn pelanggan ini, beberapa metrik evaluasi utama yang d
 
 **Accuracy**
 
-![Accuracy](images/Accuracy.png)
+![Accuracy](https://raw.githubusercontent.com/LapplandSa/Proyek-Predictive-Analytics/main/images/Accuracy.png)
 
 Mengukur proporsi prediksi yang benar dari keseluruhan data. Namun, akurasi dapat menyesatkan jika data tidak seimbang karena model dapat memberikan prediksi mayoritas yang tinggi.
 
 **Precision**
 
-![Precision](images/Precision.png)
+![Precision](https://raw.githubusercontent.com/LapplandSa/Proyek-Predictive-Analytics/main/images/Precision.png)
 
 Mengukur seberapa tepat prediksi positif model, yaitu dari semua yang diprediksi churn, berapa yang benar-benar churn. Precision penting untuk menghindari terlalu banyak false alarm, yaitu pelanggan yang diprediksi churn padahal tidak.
 
 **Recall (Sensitivity)**
 
-![Recall](images/Recall.jpg)
+![Recall](https://raw.githubusercontent.com/LapplandSa/Proyek-Predictive-Analytics/main/images/Recall.jpg)
 
 Mengukur kemampuan model untuk menangkap semua kasus positif sebenarnya, yaitu dari semua pelanggan yang benar-benar churn, berapa yang terdeteksi oleh model. Recall sangat penting dalam konteks churn prediction karena perusahaan ingin meminimalkan pelanggan yang hilang tanpa terdeteksi.
 
 **F1-Score**
 
-![F1-Score](images/F1-Score.png)
+![F1-Score](https://raw.githubusercontent.com/LapplandSa/Proyek-Predictive-Analytics/main/images/F1-Score.png)
 
 Harmonik rata-rata dari precision dan recall, memberikan keseimbangan antara keduanya. F1 Score berguna sebagai metrik tunggal untuk mengukur performa pada dataset yang tidak seimbang.
 
@@ -263,7 +263,7 @@ Selain evaluasi pada data uji, kami juga menggunakan teknik Stratified K-Fold Cr
 
 ### Penjelasan Hasil Evaluasi
 
-![Evaluasi](images/Evaluasi.png)
+![Evaluasi](https://raw.githubusercontent.com/LapplandSa/Proyek-Predictive-Analytics/main/images/Evaluasi.png)
 
 Berdasarkan hasil evaluasi model pada data uji, performa dari tiga algoritma pembelajaran mesin—K-Nearest Neighbors (KNN), Random Forest, dan Gradient Boosting—dapat dibandingkan melalui metrik accuracy, precision, recall, dan F1 score.
 
