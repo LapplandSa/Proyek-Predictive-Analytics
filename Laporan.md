@@ -11,6 +11,7 @@ Seiring berkembangnya teknologi dan data analitik, machine learning kini menjadi
 Dalam proyek ini, digunakan beberapa algoritma supervised learning seperti Random Forest, Gradient Boosting, dan K-Nearest Neighbors (KNN) untuk membangun sistem prediksi churn berdasarkan dataset pelanggan dari sektor telekomunikasi. Dataset ini mencerminkan kondisi nyata pelanggan dan mencakup fitur-fitur penting seperti ‘Contract’, ‘PaymentMethod’, dan ‘MonthlyCharges’ yang terbukti relevan dalam analisis churn. Model yang dihasilkan tidak hanya dievaluasi berdasarkan akurasi, tetapi juga menggunakan metrik seperti precision, recall, dan F1-score untuk memastikan performa yang optimal, terutama terhadap kelas minoritas (pelanggan yang churn).
 
 **Referensi**
+
 Wardani, N. W., Dantes, G. R., & Indrawan, G. (2018). Prediksi Customer Churn dengan Algoritma Decision Tree C4.5 Berdasarkan Segmentasi Pelanggan untuk Mempertahankan Pelanggan pada Perusahaan Retail. Jurnal RESISTOR (Rekayasa Sistem Komputer), 1(1), 16–24. https://doi.org/10.31598/jurnalresistor.v1i1.219
 
 ## Business Understanding
@@ -111,7 +112,60 @@ Dataset kemudian dibagi menjadi data pelatihan (train) dan data pengujian (test)
 Fitur numerik seperti tenure, MonthlyCharges, dan TotalCharges memiliki skala nilai yang berbeda-beda dan rentang yang luas. Untuk menghindari fitur dengan skala besar mendominasi pembelajaran, dilakukan StandardScaler yang mentransformasikan fitur menjadi distribusi dengan mean 0 dan standar deviasi 1. Standarisasi dilakukan hanya pada data train (fit) dan hasil transformasi diaplikasikan juga ke data test untuk menghindari data leakage. Tahapan standarisasi ini membantu mempercepat konvergensi model dan meningkatkan akurasi, terutama pada algoritma yang sensitif terhadap skala fitur seperti KNN dan Gradient Boosting.
 
 ## Modeling
-Tahapan ini membahas mengenai model machine learning yang digunakan untuk menyelesaikan permasalahan. Anda perlu menjelaskan tahapan dan parameter yang digunakan pada proses pemodelan.
+Dalam proyek ini, digunakan tiga algoritma machine learning untuk memprediksi churn pelanggan, yaitu K-Nearest Neighbors (KNN), Random Forest, dan Gradient Boosting. Ketiga model ini dipilih karena memiliki karakteristik dan kelebihan masing-masing dalam menangani data klasifikasi seperti churn prediction.
+
+**1. K-Nearest Neighbors (KNN)**
+
+- Deskripsi: Algoritma KNN bekerja dengan mengklasifikasikan data berdasarkan label mayoritas dari k tetangga terdekat pada ruang fitur.
+
+- Kelebihan: Mudah dipahami dan diimplementasikan, efektif untuk dataset dengan distribusi yang jelas.
+
+- Kekurangan: Sensitif terhadap fitur yang tidak diskalakan dan data outlier, serta cenderung lambat pada dataset besar karena harus menghitung jarak ke semua titik data.
+
+- Parameter utama: jumlah tetangga (default 5).
+
+**2. Random Forest**
+
+- Deskripsi: Algoritma ensemble yang membangun banyak pohon keputusan secara acak dan menggabungkan hasilnya untuk meningkatkan akurasi dan mengurangi overfitting.
+
+- Kelebihan: Tahan terhadap overfitting, dapat menangani fitur numerik dan kategorikal, serta memberikan fitur penting (feature importance).
+
+- Kekurangan: Model cenderung lebih kompleks dan membutuhkan waktu komputasi lebih lama dibandingkan KNN.
+
+- Parameter utama: jumlah pohon (n_estimators=100), random state untuk reproducibility.
+
+**3. Gradient Boosting**
+
+- Deskripsi: Algoritma boosting yang membangun model secara iteratif dengan fokus memperbaiki kesalahan dari model sebelumnya, menghasilkan model yang kuat dan akurat.
+
+- Kelebihan: Memiliki performa yang tinggi pada banyak jenis data, mampu menangani interaksi fitur yang kompleks.
+
+- Kekurangan: Rentan terhadap overfitting jika tidak dilakukan tuning parameter dengan tepat, membutuhkan waktu pelatihan yang lebih lama.
+
+- Parameter utama: jumlah estimator (n_estimators=100), learning rate (learning_rate=0.1), random state.
+
+**Proses Pelatihan dan Evaluasi**
+
+- Semua model dilatih menggunakan data training yang sudah dipersiapkan (encoded dan distandarisasi).
+
+- Evaluasi dilakukan dengan mengukur akurasi, precision, recall, dan F1-score pada data test.
+
+- Cross-validation dengan Stratified K-Fold (5 fold) juga dilakukan untuk mendapatkan estimasi performa yang lebih stabil dan menghindari bias.
+
+**Pemilihan Model Terbaik**
+
+Dari hasil evaluasi, model Gradient Boosting menunjukkan nilai metrik evaluasi terbaik pada data test, khususnya pada recall dan F1-score yang penting untuk kasus churn karena ingin meminimalkan false negative (pelanggan yang berisiko churn tidak terdeteksi). Oleh karena itu, Gradient Boosting dipilih sebagai model utama untuk solusi prediksi churn.
+
+**Improvement Model**
+Untuk model Gradient Boosting, langkah improvement yang dapat dilakukan adalah:
+
+Hyperparameter tuning menggunakan teknik Grid Search atau Random Search untuk menemukan kombinasi terbaik dari parameter seperti n_estimators, learning_rate, dan max_depth.
+
+Early stopping untuk menghindari overfitting dengan menghentikan pelatihan jika performa pada data validasi tidak meningkat.
+
+Feature engineering untuk menambah fitur baru yang lebih informatif.
+
+Namun, untuk baseline proyek ini, model Gradient Boosting dengan parameter default sudah cukup untuk memberikan hasil yang memuaskan.
 
 **Rubrik/Kriteria Tambahan (Opsional)**: 
 - Menjelaskan kelebihan dan kekurangan dari setiap algoritma yang digunakan.
@@ -119,13 +173,37 @@ Tahapan ini membahas mengenai model machine learning yang digunakan untuk menyel
 - Jika menggunakan dua atau lebih algoritma pada solution statement, maka pilih model terbaik sebagai solusi. **Jelaskan mengapa memilih model tersebut sebagai model terbaik**.
 
 ## Evaluation
-Pada bagian ini anda perlu menyebutkan metrik evaluasi yang digunakan. Lalu anda perlu menjelaskan hasil proyek berdasarkan metrik evaluasi yang digunakan.
+**Metrik Evaluasi yang Digunakan**
+Dalam proyek prediksi churn pelanggan ini, beberapa metrik evaluasi utama yang digunakan adalah:
 
-Sebagai contoh, Anda memiih kasus klasifikasi dan menggunakan metrik **akurasi, precision, recall, dan F1 score**. Jelaskan mengenai beberapa hal berikut:
-- Penjelasan mengenai metrik yang digunakan
-- Menjelaskan hasil proyek berdasarkan metrik evaluasi
+Accuracy
 
-Ingatlah, metrik evaluasi yang digunakan harus sesuai dengan konteks data, problem statement, dan solusi yang diinginkan.
+Mengukur proporsi prediksi yang benar dari keseluruhan data. Namun, akurasi dapat menyesatkan jika data tidak seimbang karena model dapat memberikan prediksi mayoritas yang tinggi.
+
+Precision
+
+Mengukur seberapa tepat prediksi positif model, yaitu dari semua yang diprediksi churn, berapa yang benar-benar churn. Precision penting untuk menghindari terlalu banyak false alarm, yaitu pelanggan yang diprediksi churn padahal tidak.
+
+Recall (Sensitivity)
+
+Mengukur kemampuan model untuk menangkap semua kasus positif sebenarnya, yaitu dari semua pelanggan yang benar-benar churn, berapa yang terdeteksi oleh model. Recall sangat penting dalam konteks churn prediction karena perusahaan ingin meminimalkan pelanggan yang hilang tanpa terdeteksi.
+
+F1 Score
+
+Harmonik rata-rata dari precision dan recall, memberikan keseimbangan antara keduanya. F1 Score berguna sebagai metrik tunggal untuk mengukur performa pada dataset yang tidak seimbang.
+
+**Penjelasan Hasil Evaluasi**
+Setelah menerapkan model Gradient Boosting pada dataset churn, diperoleh hasil evaluasi sebagai berikut:
+
+Accuracy yang cukup tinggi menunjukkan model mampu membedakan antara pelanggan churn dan non-churn dengan baik secara umum.
+
+Precision yang baik mengindikasikan bahwa mayoritas pelanggan yang diprediksi churn benar-benar pelanggan yang berisiko berhenti berlangganan, sehingga upaya retensi tidak mubazir.
+
+Recall yang tinggi menjadi fokus utama karena mendeteksi sebanyak mungkin pelanggan berisiko churn memungkinkan perusahaan untuk mengambil tindakan preventif lebih awal dan mengurangi kerugian pelanggan.
+
+F1 Score yang seimbang menunjukkan bahwa model tidak hanya fokus pada precision atau recall, tapi keduanya terjaga dengan baik, sehingga model dapat diandalkan untuk keputusan bisnis.
+
+Secara keseluruhan, metrik evaluasi ini menggambarkan bahwa model prediksi churn yang dibangun dapat membantu perusahaan mengidentifikasi pelanggan berisiko dengan efektif, sehingga dapat mengurangi tingkat churn dan meningkatkan loyalitas pelanggan.
 
 **Rubrik/Kriteria Tambahan (Opsional)**: 
 - Menjelaskan formula metrik dan bagaimana metrik tersebut bekerja.
