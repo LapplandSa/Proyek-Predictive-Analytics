@@ -137,13 +137,54 @@ Ada pelanggan yang hanya bayar total $18.8 (mungkin baru bergabung), dan yang la
 **Visualisasi Data Kategorikal**
 
 ![kategorikal](https://raw.githubusercontent.com/LapplandSa/Proyek-Predictive-Analytics/main/images/kategorikal1.png)
+
+- Gender: Terdapat 3.549 data berjenis kelamin laki-laki dan 3.483 data berjenis kelamin perempuan.
+
+- Partner: Jumlah data dengan status tidak memiliki pasangan adalah 3.639, sedangkan yang memiliki pasangan sebanyak 3.393.
+
+- Dependents: Data pelanggan tanpa tanggungan berjumlah 4.933, sementara yang memiliki tanggungan berjumlah 2.099.
+
+- PhoneService: Sebanyak 6.352 pelanggan menggunakan layanan telepon, dan 680 pelanggan tidak menggunakan layanan tersebut.
+
 ![kategorikal](https://raw.githubusercontent.com/LapplandSa/Proyek-Predictive-Analytics/main/images/kategorikal2.png)
+
+- MultipleLines: Data terbagi menjadi tiga kategori, yaitu 3.385 pelanggan tanpa layanan multiple lines, 2.967 pelanggan yang menggunakan layanan multiple lines, serta 680 pelanggan yang tidak memiliki layanan telepon.
+
+- InternetService: Pelanggan terbagi menjadi tiga kelompok berdasarkan jenis layanan internet yang digunakan, yaitu 3.096 pelanggan menggunakan Fiber optic, 2.416 pelanggan menggunakan DSL, dan 1.520 pelanggan tidak menggunakan layanan internet.
+
+- OnlineSecurity: Sebanyak 3.497 pelanggan tidak menggunakan layanan keamanan online, 2.015 pelanggan menggunakan layanan tersebut, dan 1.520 pelanggan tidak menggunakan layanan internet sehingga tidak memakai layanan keamanan online.
+
+- OnlineBackup: Jumlah pelanggan tanpa layanan backup online adalah 3.087, dengan 2.425 pelanggan menggunakan layanan tersebut, dan 1.520 pelanggan tidak memiliki layanan internet.
+
 ![kategorikal](https://raw.githubusercontent.com/LapplandSa/Proyek-Predictive-Analytics/main/images/kategorikal3.png)
+
+- DeviceProtection: Terdapat 3.094 pelanggan tanpa layanan proteksi perangkat, 2.418 pelanggan yang menggunakan layanan tersebut, dan 1.520 pelanggan tanpa layanan internet.
+
+- TechSupport: Data menunjukkan 3.472 pelanggan tanpa layanan dukungan teknis, 2.040 pelanggan yang menggunakan layanan, dan 1.520 pelanggan tanpa layanan internet.
+
+- StreamingTV: Sebanyak 2.809 pelanggan tidak menggunakan layanan streaming TV, 2.703 pelanggan menggunakan layanan tersebut, dan 1.520 pelanggan tanpa layanan internet.
+
+- StreamingMovies: Terdapat 2.781 pelanggan tanpa layanan streaming film, 2.731 pelanggan yang menggunakan layanan tersebut, serta 1.520 pelanggan tanpa layanan internet.
+
 ![kategorikal](https://raw.githubusercontent.com/LapplandSa/Proyek-Predictive-Analytics/main/images/kategorikal4.png)
+
+- Contract: Pelanggan terbagi dalam tiga jenis kontrak, yaitu 3.875 pelanggan dengan kontrak bulanan, 1.685 pelanggan dengan kontrak dua tahun, dan 1.472 pelanggan dengan kontrak satu tahun.
+
+- PaperlessBilling: Data menunjukkan 4.168 pelanggan menggunakan layanan tagihan tanpa kertas, dan 2.864 pelanggan menggunakan tagihan konvensional.
+
+- PaymentMethod: Terdapat empat metode pembayaran yang digunakan pelanggan, yaitu 2.365 dengan cek elektronik, 1.604 dengan cek pos, 1.542 dengan transfer bank otomatis, dan 1.521 dengan kartu kredit otomatis.
+
+- Churn: Jumlah pelanggan yang tidak berhenti berlangganan sebanyak 5.163, sedangkan yang berhenti berlangganan sejumlah 1.869.
 
 **Visualisasi Data Numerikal**
 
 ![numerikal](https://raw.githubusercontent.com/LapplandSa/Proyek-Predictive-Analytics/main/images/numerikal.png)
+
+- TotalCharges dan Tenure menunjukkan hubungan yang kuat dengan nilai korelasi sebesar 0.83. Hal ini mengindikasikan bahwa total tagihan pelanggan cenderung meningkat seiring dengan lamanya pelanggan menggunakan layanan (tenure).
+
+- MonthlyCharges dan TotalCharges memiliki korelasi sedang sebesar 0.65, yang menunjukkan bahwa tagihan bulanan juga berkontribusi terhadap total tagihan, namun pengaruhnya tidak sebesar hubungan antara tenure dan total charges.
+
+- Tenure dan MonthlyCharges menunjukkan korelasi yang paling lemah dengan nilai 0.25, menandakan bahwa lama berlangganan pelanggan tidak terlalu berpengaruh terhadap besarnya tagihan bulanan.
 
 **Matriks Korelasi**
 
@@ -265,10 +306,16 @@ Selain evaluasi pada data uji, kami juga menggunakan teknik Stratified K-Fold Cr
 
 ![Evaluasi](https://raw.githubusercontent.com/LapplandSa/Proyek-Predictive-Analytics/main/images/Evaluasi.png)
 
-Berdasarkan hasil evaluasi model pada data uji, performa dari tiga algoritma pembelajaran mesin—K-Nearest Neighbors (KNN), Random Forest, dan Gradient Boosting—dapat dibandingkan melalui metrik accuracy, precision, recall, dan F1 score.
+Berdasarkan hasil evaluasi pada data uji, performa tiga algoritma pembelajaran mesin—K-Nearest Neighbors (KNN), Random Forest, dan Gradient Boosting—dibandingkan menggunakan metrik accuracy, precision, recall, dan F1 score.
 
-Model KNN memperoleh akurasi sebesar 0.7669, dengan precision 0.5650, recall 0.5338, dan F1 score 0.5489. Meskipun cukup sederhana, KNN memiliki keterbatasan dalam menangkap pola kompleks dan cenderung sensitif terhadap skala data dan distribusi kelas.
+Model KNN mencapai akurasi 0.7669 dengan precision 0.5650, recall 0.5338, dan F1 score 0.5489. Meskipun sederhana, KNN memiliki keterbatasan dalam menangkap pola yang kompleks serta sensitif terhadap skala data dan distribusi kelas.
 
-Model Random Forest menunjukkan peningkatan performa, dengan akurasi 0.7927, precision 0.6438, recall 0.4916, dan F1 score 0.5569. Ini menandakan bahwa model lebih baik dalam membedakan pelanggan churn dibandingkan KNN, meskipun recall-nya masih rendah, yang berarti model masih gagal mendeteksi banyak pelanggan yang benar-benar churn.
+Model Random Forest menunjukkan peningkatan performa dengan akurasi 0.7927, precision 0.6438, recall 0.4916, dan F1 score 0.5569. Model ini lebih baik dalam membedakan pelanggan churn dibanding KNN, meskipun recall-nya masih rendah, sehingga masih banyak churner yang tidak terdeteksi.
 
-Model terbaik dalam evaluasi ini adalah Gradient Boosting, yang menghasilkan akurasi tertinggi sebesar 0.8007, precision 0.6621, recall 0.5117, dan F1 score 0.5768. Metrik F1 score yang lebih tinggi menunjukkan bahwa model ini paling seimbang dalam mengidentifikasi pelanggan yang akan churn (recall) tanpa mengorbankan terlalu banyak prediksi positif yang salah (precision). Dengan demikian, Gradient Boosting dipilih sebagai model akhir karena memberikan performa paling optimal secara keseluruhan, khususnya dalam konteks masalah churn yang menuntut keseimbangan antara deteksi dan ketepatan.
+Model terbaik adalah Gradient Boosting dengan akurasi tertinggi 0.8007, precision 0.6621, recall 0.5117, dan F1 score 0.5768. F1 score yang lebih tinggi menandakan keseimbangan terbaik antara kemampuan model mengidentifikasi churner (recall) tanpa terlalu banyak prediksi positif yang salah (precision). Oleh karena itu, Gradient Boosting dipilih sebagai model akhir karena performa paling optimal untuk kasus churn yang membutuhkan keseimbangan antara deteksi dan ketepatan.
+
+Selain model utama tersebut, upaya improvement melalui hyperparameter tuning dan fitur tambahan juga dilakukan. Namun, hasil evaluasi menunjukkan penurunan akurasi menjadi 0.7932 pada model improved, dengan precision turun menjadi 0.6317, recall naik ke 0.5321, dan F1 score sedikit meningkat menjadi 0.5776. Cross-validated accuracy model improved adalah 0.7995, hampir setara dengan akurasi model default.
+
+Perbandingan ini menunjukkan adanya trade-off: precision menurun sementara recall meningkat, sehingga F1 score relatif stabil. Penurunan akurasi kemungkinan disebabkan oleh parameter yang dioptimalkan untuk meningkatkan deteksi churner (kelas minoritas), yang berdampak pada kemampuan generalisasi. Cross-validation mengindikasikan model improved masih konsisten dan tidak mengalami overfitting.
+
+Secara keseluruhan, meskipun akurasi sedikit menurun, peningkatan recall dan F1 score adalah hal positif dalam konteks churn, di mana kemampuan mendeteksi pelanggan yang akan churn sangat penting. Pemilihan antara model default atau improved dapat disesuaikan dengan prioritas bisnis, apakah mengutamakan ketepatan prediksi positif (precision) atau cakupan deteksi churn (recall).
