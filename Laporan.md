@@ -89,7 +89,17 @@ Dataset terdiri dari 7043 baris dan 21 kolom, dengan setiap baris mewakili satu 
 
 - Churn : Target variabel, apakah pelanggan berhenti berlangganan (Yes) atau tidak (No).
 
-**Exploratory Data Analysis**
+### Exploratory Data Analysis
+
+![Grafik Churn](images/numerik.png)
+![Grafik Churn](images/numerik.png)
+![Grafik Churn](images/numerik.png)
+![Grafik Churn](images/numerik.png)
+![Grafik Churn](images/numerik.png)
+![Grafik Churn](images/numerik.png)
+![Grafik Churn](images/numerik.png)
+![kategorikal](images/viskategorikal4.png)
+
 
 **Rubrik/Kriteria Tambahan (Opsional)**:
 - Melakukan beberapa tahapan yang diperlukan untuk memahami data, contohnya teknik visualisasi data atau exploratory data analysis.
