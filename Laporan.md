@@ -314,6 +314,8 @@ Model Random Forest menunjukkan peningkatan performa dengan akurasi 0.7927, prec
 
 Model terbaik adalah Gradient Boosting dengan akurasi tertinggi 0.8007, precision 0.6621, recall 0.5117, dan F1 score 0.5768. F1 score yang lebih tinggi menandakan keseimbangan terbaik antara kemampuan model mengidentifikasi churner (recall) tanpa terlalu banyak prediksi positif yang salah (precision). Oleh karena itu, Gradient Boosting dipilih sebagai model akhir karena performa paling optimal untuk kasus churn yang membutuhkan keseimbangan antara deteksi dan ketepatan.
 
+![Improved](https://raw.githubusercontent.com/LapplandSa/Proyek-Predictive-Analytics/main/images/Improved.png)
+
 Selain model utama tersebut, upaya improvement melalui hyperparameter tuning dan fitur tambahan juga dilakukan. Namun, hasil evaluasi menunjukkan penurunan akurasi menjadi 0.7932 pada model improved, dengan precision turun menjadi 0.6317, recall naik ke 0.5321, dan F1 score sedikit meningkat menjadi 0.5776. Cross-validated accuracy model improved adalah 0.7995, hampir setara dengan akurasi model default.
 
 Perbandingan ini menunjukkan adanya trade-off: precision menurun sementara recall meningkat, sehingga F1 score relatif stabil. Penurunan akurasi kemungkinan disebabkan oleh parameter yang dioptimalkan untuk meningkatkan deteksi churner (kelas minoritas), yang berdampak pada kemampuan generalisasi. Cross-validation mengindikasikan model improved masih konsisten dan tidak mengalami overfitting.
