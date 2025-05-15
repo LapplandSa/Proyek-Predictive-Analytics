@@ -234,17 +234,25 @@ Dalam proyek prediksi churn pelanggan ini, beberapa metrik evaluasi utama yang d
 
 **Accuracy**
 
+![Accuracy](images/Accuracy.png)
+
 Mengukur proporsi prediksi yang benar dari keseluruhan data. Namun, akurasi dapat menyesatkan jika data tidak seimbang karena model dapat memberikan prediksi mayoritas yang tinggi.
 
 **Precision**
+
+![Precision](images/Precision.png)
 
 Mengukur seberapa tepat prediksi positif model, yaitu dari semua yang diprediksi churn, berapa yang benar-benar churn. Precision penting untuk menghindari terlalu banyak false alarm, yaitu pelanggan yang diprediksi churn padahal tidak.
 
 **Recall (Sensitivity)**
 
+![Recall](images/Recall.jpg)
+
 Mengukur kemampuan model untuk menangkap semua kasus positif sebenarnya, yaitu dari semua pelanggan yang benar-benar churn, berapa yang terdeteksi oleh model. Recall sangat penting dalam konteks churn prediction karena perusahaan ingin meminimalkan pelanggan yang hilang tanpa terdeteksi.
 
-**F1 Score**
+**F1-Score**
+
+![F1-Score](images/F1-Score.png)
 
 Harmonik rata-rata dari precision dan recall, memberikan keseimbangan antara keduanya. F1 Score berguna sebagai metrik tunggal untuk mengukur performa pada dataset yang tidak seimbang.
 
@@ -254,24 +262,12 @@ Selain evaluasi pada data uji, kami juga menggunakan teknik Stratified K-Fold Cr
 
 ### Penjelasan Hasil Evaluasi
 
-Setelah menerapkan model Gradient Boosting pada dataset churn, diperoleh hasil evaluasi sebagai berikut:
+![Evaluasi](images/Evaluasi.png)
 
-Accuracy yang cukup tinggi menunjukkan model mampu membedakan antara pelanggan churn dan non-churn dengan baik secara umum.
+Berdasarkan hasil evaluasi model pada data uji, performa dari tiga algoritma pembelajaran mesin—K-Nearest Neighbors (KNN), Random Forest, dan Gradient Boosting—dapat dibandingkan melalui metrik accuracy, precision, recall, dan F1 score.
 
-Precision yang baik mengindikasikan bahwa mayoritas pelanggan yang diprediksi churn benar-benar pelanggan yang berisiko berhenti berlangganan, sehingga upaya retensi tidak mubazir.
+Model KNN memperoleh akurasi sebesar 0.7669, dengan precision 0.5650, recall 0.5338, dan F1 score 0.5489. Meskipun cukup sederhana, KNN memiliki keterbatasan dalam menangkap pola kompleks dan cenderung sensitif terhadap skala data dan distribusi kelas.
 
-Recall yang tinggi menjadi fokus utama karena mendeteksi sebanyak mungkin pelanggan berisiko churn memungkinkan perusahaan untuk mengambil tindakan preventif lebih awal dan mengurangi kerugian pelanggan.
+Model Random Forest menunjukkan peningkatan performa, dengan akurasi 0.7927, precision 0.6438, recall 0.4916, dan F1 score 0.5569. Ini menandakan bahwa model lebih baik dalam membedakan pelanggan churn dibandingkan KNN, meskipun recall-nya masih rendah, yang berarti model masih gagal mendeteksi banyak pelanggan yang benar-benar churn.
 
-F1 Score yang seimbang menunjukkan bahwa model tidak hanya fokus pada precision atau recall, tapi keduanya terjaga dengan baik, sehingga model dapat diandalkan untuk keputusan bisnis.
-
-Secara keseluruhan, metrik evaluasi ini menggambarkan bahwa model prediksi churn yang dibangun dapat membantu perusahaan mengidentifikasi pelanggan berisiko dengan efektif, sehingga dapat mengurangi tingkat churn dan meningkatkan loyalitas pelanggan.
-
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan formula metrik dan bagaimana metrik tersebut bekerja.
-
-**---Ini adalah bagian akhir laporan---**
-
-_Catatan:_
-- _Anda dapat menambahkan gambar, kode, atau tabel ke dalam laporan jika diperlukan. Temukan caranya pada contoh dokumen markdown di situs editor [Dillinger](https://dillinger.io/), [Github Guides: Mastering markdown](https://guides.github.com/features/mastering-markdown/), atau sumber lain di internet. Semangat!_
-- Jika terdapat penjelasan yang harus menyertakan code snippet, tuliskan dengan sewajarnya. Tidak perlu menuliskan keseluruhan kode project, cukup bagian yang ingin dijelaskan saja.
-
+Model terbaik dalam evaluasi ini adalah Gradient Boosting, yang menghasilkan akurasi tertinggi sebesar 0.8007, precision 0.6621, recall 0.5117, dan F1 score 0.5768. Metrik F1 score yang lebih tinggi menunjukkan bahwa model ini paling seimbang dalam mengidentifikasi pelanggan yang akan churn (recall) tanpa mengorbankan terlalu banyak prediksi positif yang salah (precision). Dengan demikian, Gradient Boosting dipilih sebagai model akhir karena memberikan performa paling optimal secara keseluruhan, khususnya dalam konteks masalah churn yang menuntut keseimbangan antara deteksi dan ketepatan.
