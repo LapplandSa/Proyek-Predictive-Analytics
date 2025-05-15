@@ -94,7 +94,7 @@ Dataset terdiri dari 7043 baris dan 21 kolom, dengan setiap baris mewakili satu 
 
 **Informasi Dataset**
 
-![info dataset](images/info.png)
+![info dataset](https://raw.githubusercontent.com/LapplandSa/Proyek-Predictive-Analytics/main/images/info.png)
 
 **Kolom Null**
 
