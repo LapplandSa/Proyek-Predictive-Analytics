@@ -387,3 +387,9 @@ Memberikan hasil yang kompetitif dan meningkatkan recall, meskipun terjadi trade
 **Cross-validation:**
 
 Cross-validation memberikan keyakinan bahwa performa model tidak hanya cocok di data uji, tetapi juga stabil dan dapat digeneralisasi, yang penting untuk memastikan keputusan bisnis berbasis model tetap dapat diandalkan saat diterapkan ke data pelanggan baru.
+
+### Perbandingan Performa pada Data Train dan Test
+
+![Perbandingan_Data_Split](https://raw.githubusercontent.com/LapplandSa/Proyek-Predictive-Analytics/main/images/Perbandingan_Data_Split.png)
+
+Selain menggunakan metrik evaluasi standar, dilakukan juga perbandingan metrik (Accuracy, Precision, Recall, F1-score) antara data pelatihan dan data pengujian untuk mendeteksi kemungkinan overfitting atau underfitting. Hasil evaluasi menunjukkan performa model pada data train (F1-score: 0.7568) dan test (F1-score: 0.7224) relatif seimbang, dengan selisih kecil pada semua metrik. Ini mengindikasikan bahwa model berhasil belajar dari data pelatihan tanpa overfitting, serta mampu melakukan generalisasi dengan baik ke data baru. Digunakannya rata-rata macro untuk precision, recall, dan F1-score juga memastikan evaluasi memperhitungkan performa pada tiap kelas secara seimbang, yang penting dalam konteks prediksi churn dengan distribusi kelas yang tidak seimbang.
