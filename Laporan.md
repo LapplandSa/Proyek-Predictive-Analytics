@@ -47,7 +47,7 @@ Dataset yang digunakan dalam proyek ini berasal dari Telco Customer Churn yang t
 
 Dataset terdiri dari 7043 baris dan 21 kolom, dengan setiap baris mewakili satu pelanggan.
 
-### Variabel-variabel pada Restaurant UCI dataset adalah sebagai berikut:
+### Variabel-variabel pada Telco Customer Churn dataset adalah sebagai berikut:
 - customerID : ID unik pelanggan.
 
 - gender : Jenis kelamin pelanggan (Male atau Female).
@@ -199,6 +199,22 @@ Sedangkan kolom tenure dan MonthlyCharges menunjukkan hubungan paling lemah yang
 ## Data Preparation
 Sebelum membangun model prediksi churn, dilakukan beberapa tahapan persiapan data agar data siap digunakan oleh algoritma machine learning. Tahapan tersebut adalah sebagai berikut:
 
+**Menangani Missing Value**
+
+Ditemukan nilai kosong sebanyak 11 entri pada kolom TotalCharges. Nilai-nilai ini kemungkinan besar muncul dari pelanggan yang baru bergabung dan belum memiliki tagihan total. Untuk menjaga kualitas data, baris dengan nilai kosong tersebut dihapus dari dataset karena jumlahnya sangat kecil dan tidak akan berdampak signifikan terhadap distribusi data.
+
+**Menangani Data Duplikat**
+
+Pemeriksaan terhadap seluruh dataset menunjukkan bahwa tidak terdapat duplikasi baris, sehingga tidak diperlukan penghapusan data duplikat.
+
+**Drop Kolom customerID**
+
+Kolom customerID dihapus karena bersifat unik untuk setiap pelanggan dan tidak memiliki kontribusi informasi terhadap proses prediksi. Kolom ini hanya berfungsi sebagai identifier dan tidak relevan untuk model pembelajaran mesin.
+
+**Menangani Outlier**
+
+Analisis terhadap kolom numerik seperti MonthlyCharges, TotalCharges, dan tenure menunjukkan bahwa tidak terdapat outlier yang mencolok. Penyebaran data berada dalam rentang yang wajar, sehingga tidak diperlukan penyesuaian atau transformasi lebih lanjut.
+
 **Penanganan Data Kategori (Encoding)**
 
 Dataset berisi fitur kategorikal yang perlu diubah menjadi representasi numerik agar dapat diproses oleh model. Tahapan encoding ini penting untuk memastikan model dapat memahami dan memanfaatkan informasi kategori secara efektif.
@@ -321,3 +337,51 @@ Selain model utama tersebut, upaya improvement melalui hyperparameter tuning dan
 Perbandingan ini menunjukkan adanya trade-off: precision menurun sementara recall meningkat, sehingga F1 score relatif stabil. Penurunan akurasi kemungkinan disebabkan oleh parameter yang dioptimalkan untuk meningkatkan deteksi churner (kelas minoritas), yang berdampak pada kemampuan generalisasi. Cross-validation mengindikasikan model improved masih konsisten dan tidak mengalami overfitting.
 
 Secara keseluruhan, meskipun akurasi sedikit menurun, peningkatan recall dan F1 score adalah hal positif dalam konteks churn, di mana kemampuan mendeteksi pelanggan yang akan churn sangat penting. Pemilihan antara model default atau improved dapat disesuaikan dengan prioritas bisnis, apakah mengutamakan ketepatan prediksi positif (precision) atau cakupan deteksi churn (recall).
+
+### Keterkaitan dengan Business Understanding
+
+Evaluasi performa model dalam proyek ini memberikan kontribusi signifikan terhadap pemahaman bisnis, khususnya dalam menjawab kebutuhan utama perusahaan: mengurangi kehilangan pelanggan secara proaktif. Model Gradient Boosting yang dipilih terbukti mampu mendeteksi pelanggan yang berisiko churn dengan akurasi dan keseimbangan metrik yang baik (precision dan recall), yang berarti perusahaan dapat mengidentifikasi dan menargetkan pelanggan yang berpotensi churn dengan intervensi yang tepat waktu dan efisien.
+
+### Keterkaitan dengan Problem Statements
+
+**Identifikasi pelanggan sebelum churn:**
+
+Model Gradient Boosting dengan recall 0.5117 dan versi improved dengan 0.5321 menunjukkan bahwa lebih dari 50% pelanggan churn berhasil terdeteksi sebelum mereka pergi. Meskipun ini menunjukkan kemajuan, angka tersebut belum sepenuhnya ideal untuk kebutuhan bisnis yang ingin meminimalkan kehilangan pelanggan. Namun, mendeteksi setengah dari churner tetap memberi nilai praktis dan menjadi langkah awal yang penting dalam menjawab problem statement pertama.
+
+**Menemukan faktor yang memengaruhi churn:**
+
+![Feature Importance](https://raw.githubusercontent.com/LapplandSa/Proyek-Predictive-Analytics/main/images/Feature_Importance.png)
+
+Berdasarkan hasil analisis feature importance dari model Gradient Boosting, fitur yang paling berpengaruh terhadap churn adalah tenure, diikuti oleh InternetService_Fiber optic, dan PaymentMethod_Electronic check. Hal ini menunjukkan bahwa lama berlangganan, jenis layanan internet, dan metode pembayaran merupakan faktor utama yang menentukan apakah seorang pelanggan akan churn atau tidak.
+
+**Mengukur akurasi prediksi churn dengan machine learning:**
+
+Dengan akurasi model di atas 79%, dan bahkan mencapai 80.07% pada cross validation Gradient Boosting, maka machine learning terbukti efektif dalam memprediksi churn berdasarkan data historis pelanggan.
+
+### Evaluasi Terhadap Goals
+
+**Membangun model prediktif churn yang akurat:**
+
+Tercapai, dengan Gradient Boosting mencapai akurasi 0.8007 dan F1 score 0.5768, serta performa improved model yang tetap kompetitif.
+
+**Menentukan fitur yang paling berkontribusi:**
+
+Tercapai dengan memanfaatkan model Gradient Boosting, yang tidak hanya memberikan performa prediksi terbaik, tetapi juga mampu mengidentifikasi fitur-fitur yang paling berpengaruh terhadap churn.
+
+**Mengevaluasi dan memilih model terbaik:**
+
+Tercapai dengan melalui perbandingan tiga algoritma utama dan satu model hasil improvement, kemudian dipilih model Gradient Boosting yang telah di cross validation sebagai final model dengan performa paling optimal secara keseluruhan.
+
+### Dampak dari Solution Statements
+
+**Penerapan algoritma beragam (KNN, RF, GB):**
+
+Menunjukkan perbedaan performa dan kompleksitas yang memberikan insight terhadap efektivitas pendekatan sederhana (KNN) hingga kompleks (GB).
+
+**Hyperparameter tuning:**
+
+Memberikan hasil yang kompetitif dan meningkatkan recall, meskipun terjadi trade-off pada akurasi. Ini menegaskan bahwa tuning dapat disesuaikan dengan prioritas bisnis (misal: fokus deteksi churn sebanyak mungkin).
+
+**Cross-validation:**
+
+Memberikan keyakinan bahwa performa model tidak hanya cocok di data uji, tetapi juga stabil dan dapat digeneralisasi pada data yang belum terlihat sebelumnya.
