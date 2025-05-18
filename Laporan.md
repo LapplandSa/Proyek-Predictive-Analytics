@@ -257,7 +257,7 @@ Dalam proyek ini, digunakan tiga algoritma machine learning untuk memprediksi ch
 **3. Gradient Boosting**
 
 - Deskripsi: Gradient Boosting membangun model prediktif secara bertahap. Setiap model baru fokus pada memperbaiki kesalahan dari model sebelumnya.
-- 
+  
 - Kelebihan: Memiliki performa yang tinggi pada banyak jenis data, mampu menangani interaksi fitur yang kompleks.
 
 - Kekurangan: Rentan terhadap overfitting jika tidak dilakukan tuning parameter dengan tepat, membutuhkan waktu pelatihan yang lebih lama.
@@ -362,11 +362,13 @@ Dengan akurasi model di atas 79%, dan bahkan mencapai 80.07% pada cross validati
 
 **Membangun model prediktif churn yang akurat:**
 
-Tercapai, dengan Gradient Boosting mencapai akurasi 0.8007 dan F1 score 0.5768, serta performa improved model yang tetap kompetitif.
+![Churn](https://raw.githubusercontent.com/LapplandSa/Proyek-Predictive-Analytics/main/images/Churn.png)
+
+Tercapai, ditunjukkan oleh model Gradient Boosting yang menghasilkan akurasi sebesar 0.8007 dan F1 score sebesar 0.5768, serta model improved yang tetap menunjukkan performa kompetitif. Gambar di atas menunjukkan hasil pengujian terhadap sejumlah pelanggan, beserta prediksi churn dan kesesuaiannya dengan label asli.
 
 **Menentukan fitur yang paling berkontribusi:**
 
-Tercapai dengan memanfaatkan model Gradient Boosting, yang tidak hanya memberikan performa prediksi terbaik, tetapi juga mampu mengidentifikasi fitur-fitur yang paling berpengaruh terhadap churn.
+Tercapai dengan memanfaatkan model Gradient Boosting, yang tidak hanya memberikan performa prediksi terbaik, tetapi juga mampu mengidentifikasi fitur-fitur yang paling berpengaruh terhadap churn yakni tenure, InternetService_Fiber optic, dan PaymentMethod_Electronic check.
 
 **Mengevaluasi dan memilih model terbaik:**
 
@@ -384,4 +386,4 @@ Memberikan hasil yang kompetitif dan meningkatkan recall, meskipun terjadi trade
 
 **Cross-validation:**
 
-Memberikan keyakinan bahwa performa model tidak hanya cocok di data uji, tetapi juga stabil dan dapat digeneralisasi pada data yang belum terlihat sebelumnya.
+Cross-validation memberikan keyakinan bahwa performa model tidak hanya cocok di data uji, tetapi juga stabil dan dapat digeneralisasi, yang penting untuk memastikan keputusan bisnis berbasis model tetap dapat diandalkan saat diterapkan ke data pelanggan baru.
